@@ -32,7 +32,13 @@ class ImageUploader extends React.Component {
 
       fetch(`${process.env.REACT_APP_REST_API_BASE_NAME}/train/word`, {
         method: 'POST',
-        body: data
+        body: data,
+        headers:{
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': this.props.googleAccessToken
+        },
+        credentials: 'include'
       }).then(response => {
         if (response.status !== 200) {
           this.setState({
@@ -64,7 +70,13 @@ class ImageUploader extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`${process.env.REACT_APP_REST_API_BASE_NAME}/train/book/${this.props.book.id}/page-count`)
+    fetch(`${process.env.REACT_APP_REST_API_BASE_NAME}/train/book/${this.props.book.id}/page-count`, 
+      {
+        headers:{
+          'Authorization': this.props.googleAccessToken
+        },
+        credentials: 'include'
+      })
       .then(response => response.text()).then(textResponse => {
         this.setState({
           pageNumber: parseInt(textResponse, 10) + 1

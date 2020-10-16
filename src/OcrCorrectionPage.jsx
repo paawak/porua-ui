@@ -25,7 +25,13 @@ class OcrCorrectionPage extends React.Component {
   markPageIgnored() {
     const pageImageId = this.props.ocrWords[0].ocrWordId.pageImageId;
     fetch(`${process.env.REACT_APP_REST_API_BASE_NAME}/train/page/ignore/${pageImageId}`, {
-      method: 'PUT'
+      method: 'PUT',
+      headers:{
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': this.props.googleAccessToken
+      },
+      credentials: 'include'
     })
       .then(response => {
         if (response.ok) {
@@ -39,7 +45,13 @@ class OcrCorrectionPage extends React.Component {
   markPageCompleted() {
     const pageImageId = this.props.ocrWords[0].ocrWordId.pageImageId;
     fetch(`${process.env.REACT_APP_REST_API_BASE_NAME}/train/page/complete/${pageImageId}`, {
-      method: 'PUT'
+      method: 'PUT',
+      headers:{
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': this.props.googleAccessToken
+      },
+      credentials: 'include'
     })
       .then(response => {
         if (response.ok) {
@@ -66,8 +78,10 @@ class OcrCorrectionPage extends React.Component {
       fetch(`${process.env.REACT_APP_REST_API_BASE_NAME}/train/word/ignore`, {
         method: 'PUT',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': this.props.googleAccessToken
         },
+        credentials: 'include',
         body: JSON.stringify(ignoredWords)
       })
         .then(response => {
@@ -97,8 +111,10 @@ class OcrCorrectionPage extends React.Component {
       fetch(`${process.env.REACT_APP_REST_API_BASE_NAME}/train/word`, {
         method: 'PUT',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': this.props.googleAccessToken
         },
+        credentials: 'include',
         body: JSON.stringify(correctedWords)
       })
         .then(response => {
@@ -122,6 +138,7 @@ class OcrCorrectionPage extends React.Component {
         wordSequenceId={ocrWord.ocrWordId.wordSequenceId}
         givenText={ocrWord.rawText}
         correctedText={ocrWord.correctedText}
+        googleAccessToken={this.props.googleAccessToken}
         toggleMarkedForDeletion={
           () => {
             if (this.state.markedForDeletion.has(ocrWord.ocrWordId.wordSequenceId)) {

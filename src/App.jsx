@@ -77,10 +77,20 @@ class App extends React.Component {
       />;
     } else if (this.state.displayMode === DisplayMode.IMAGE_UPLOADER) {
       panelToDisplay = <div className="shadow mb-5 bg-white rounded p-2 bd-highlight">
-        <ImageUploader book={this.state.book} ocrWordsRecievedForNewPage={ocrWordsRecievedEvent}/>
+        <ImageUploader 
+          book={this.state.book} ocrWordsRecievedForNewPage={ocrWordsRecievedEvent}
+          googleAccessToken={this.state.googleAccessToken}
+        />
       </div>;
     } else if (this.state.displayMode === DisplayMode.OCR_CORRECTION_PAGE) {
-      panelToDisplay = <div className="shadow mb-5 bg-white rounded p-2 bd-highlight"><OcrCorrectionPage ocrWords={this.state.ocrWords} page={this.state.page}/></div>
+      panelToDisplay = 
+      <div className="shadow mb-5 bg-white rounded p-2 bd-highlight">
+        <OcrCorrectionPage 
+          ocrWords={this.state.ocrWords} 
+          page={this.state.page}
+          googleAccessToken={this.state.googleAccessToken}
+        />
+      </div>
     } else {
       panelToDisplay = <div/>;
     }
