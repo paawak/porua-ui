@@ -7,7 +7,8 @@ class OcrWord extends React.Component {
     super(props);
     this.state = {
       markForDelete: false,
-      correctedText: this.props.correctedText
+      correctedText: this.props.correctedText,
+      wordImage: null
     };
     this.handleCloseButton = this.handleCloseButton.bind(this);
   }
@@ -17,6 +18,21 @@ class OcrWord extends React.Component {
       markForDelete: !this.state.markForDelete
     });
     this.props.toggleMarkedForDeletion();
+  }
+
+  componentDidMount() {
+    fetch(`${process.env.REACT_APP_REST_API_BASE_NAME}/train/word/image?bookId=${this.props.bookId}&pageImageId=${this.props.pageImageId}&wordSequenceId=${this.props.wordSequenceId}`,
+      {
+        method: 'GET',
+        headers:{
+          'Authorization': this.props.googleAccessToken
+        },
+        credentials: 'include'
+      }
+      )
+      .then(rawData => rawData.blob())
+      .then(image => this.setState({ wordImage: URL.createObjectURL(image) }))
+      .catch(() => this.setState({ wordImage: null }));
   }
 
   render() {
@@ -51,7 +67,7 @@ class OcrWord extends React.Component {
                   </button> 
                 </div>                       
                 <div className="col pb-3">
-                  <img id={idGenerator("ocrImage")} alt="..." src={`${process.env.REACT_APP_REST_API_BASE_NAME}/train/word/image?bookId=${this.props.bookId}&pageImageId=${this.props.pageImageId}&wordSequenceId=${this.props.wordSequenceId}`}/>
+                  <img id={idGenerator("ocrImage")} alt="..." src={this.state.wordImage}/>
                 </div>
                 <div className="col alert alert-dark jumbotron jumbotron-fluid" role="alert">
                   <p className="lead">OCR Text</p>
