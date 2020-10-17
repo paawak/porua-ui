@@ -30,8 +30,7 @@ class OcrCorrectionPage extends React.Component {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Authorization': this.props.googleAccessToken
-      },
-      credentials: 'include'
+      }
     })
       .then(response => {
         if (response.ok) {
@@ -50,8 +49,7 @@ class OcrCorrectionPage extends React.Component {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Authorization': this.props.googleAccessToken
-      },
-      credentials: 'include'
+      }      
     })
       .then(response => {
         if (response.ok) {
@@ -76,12 +74,11 @@ class OcrCorrectionPage extends React.Component {
 
     if (ignoredWords.length > 0) {
       fetch(`${process.env.REACT_APP_REST_API_BASE_NAME}/train/word/ignore`, {
-        method: 'PUT',
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': this.props.googleAccessToken
         },
-        credentials: 'include',
         body: JSON.stringify(ignoredWords)
       })
         .then(response => {
@@ -109,12 +106,11 @@ class OcrCorrectionPage extends React.Component {
 
     if (correctedWords.length > 0) {
       fetch(`${process.env.REACT_APP_REST_API_BASE_NAME}/train/word`, {
-        method: 'PUT',
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': this.props.googleAccessToken
         },
-        credentials: 'include',
         body: JSON.stringify(correctedWords)
       })
         .then(response => {

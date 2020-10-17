@@ -49,8 +49,7 @@ class PageSelectionPanel extends React.Component {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
             'Authorization': this.props.googleAccessToken
-          },
-          credentials: 'include'
+          }
         })
         .then(rawData => rawData.json())
         .then(data => this.props.ocrWordsRecievedForExistingPage(data, page))
@@ -65,8 +64,7 @@ class PageSelectionPanel extends React.Component {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Authorization': this.props.googleAccessToken
-      },
-      credentials: 'include'
+      }
     }
     )
       .then(rawData => rawData.json())
@@ -117,8 +115,7 @@ class PageSelectionPanel extends React.Component {
                   'Accept': 'application/json',
                   'Content-Type': 'application/json',
                   'Authorization': this.props.googleAccessToken
-                },
-                credentials: 'include'
+                }
               })
               .then(rawData => rawData.json())
               .then(pages => this.setState({ pages: pages }))

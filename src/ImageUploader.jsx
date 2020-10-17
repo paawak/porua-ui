@@ -37,8 +37,7 @@ class ImageUploader extends React.Component {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
           'Authorization': this.props.googleAccessToken
-        },
-        credentials: 'include'
+        }
       }).then(response => {
         if (response.status !== 200) {
           this.setState({
@@ -74,8 +73,7 @@ class ImageUploader extends React.Component {
       {
         headers:{
           'Authorization': this.props.googleAccessToken
-        },
-        credentials: 'include'
+        }
       })
       .then(response => response.text()).then(textResponse => {
         this.setState({
