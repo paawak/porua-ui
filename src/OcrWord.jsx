@@ -26,8 +26,7 @@ class OcrWord extends React.Component {
         method: 'GET',
         headers:{
           'Authorization': this.props.googleAccessToken
-        },
-        credentials: 'include'
+        }
       }
       )
       .then(rawData => rawData.blob())
