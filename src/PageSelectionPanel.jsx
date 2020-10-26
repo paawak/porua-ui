@@ -43,7 +43,7 @@ class PageSelectionPanel extends React.Component {
       });
       let pageId = this.state.selectedPageId;
       let page = this.state.pages.filter(page => page.id === parseInt(pageId, 10))[0];
-      fetch(`${process.env.REACT_APP_REST_API_BASE_NAME}/train/word?bookId=${this.state.selectedBookId}&pageImageId=${pageId}`,
+      fetch(`${process.env.REACT_APP_REST_API_BASE_NAME}/ocr/train/query/word?bookId=${this.state.selectedBookId}&pageImageId=${pageId}`,
         {
           headers:{
             'Accept': 'application/json',
@@ -58,7 +58,7 @@ class PageSelectionPanel extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`${process.env.REACT_APP_REST_API_BASE_NAME}/train/book`, {
+    fetch(`${process.env.REACT_APP_REST_API_BASE_NAME}/ocr/train/query/book`, {
       method: 'GET',
       headers:{
         'Accept': 'application/json',
@@ -109,7 +109,7 @@ class PageSelectionPanel extends React.Component {
               selectedBookId: bookId,
               selectedPageId: null,
               pages: []            });
-            fetch(`${process.env.REACT_APP_REST_API_BASE_NAME}/train/page?bookId=${bookId}`, 
+            fetch(`${process.env.REACT_APP_REST_API_BASE_NAME}/ocr/train/query/page?bookId=${bookId}`, 
               {
                 headers:{
                   'Accept': 'application/json',
