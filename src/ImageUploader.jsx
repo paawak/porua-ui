@@ -30,7 +30,7 @@ class ImageUploader extends React.Component {
       data.append('pageNumber', this.state.pageNumber);
       data.append('image', this.imageFileInput.current.files[0]);      
 
-      fetch(`${process.env.REACT_APP_REST_API_BASE_NAME}/train/word`, {
+      fetch(`${process.env.REACT_APP_REST_API_BASE_NAME}/ocr/train/submit/image`, {
         method: 'POST',
         body: data,
         headers:{
@@ -69,7 +69,7 @@ class ImageUploader extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`${process.env.REACT_APP_REST_API_BASE_NAME}/train/book/${this.props.book.id}/page-count`, 
+    fetch(`${process.env.REACT_APP_REST_API_BASE_NAME}/ocr/train/query/book/${this.props.book.id}/page-count`, 
       {
         headers:{
           'Authorization': this.props.googleAccessToken

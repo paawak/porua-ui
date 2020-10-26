@@ -24,7 +24,7 @@ class OcrCorrectionPage extends React.Component {
 
   markPageIgnored() {
     const pageImageId = this.props.ocrWords[0].ocrWordId.pageImageId;
-    fetch(`${process.env.REACT_APP_REST_API_BASE_NAME}/train/page/ignore/${pageImageId}`, {
+    fetch(`${process.env.REACT_APP_REST_API_BASE_NAME}/ocr/train/correction/page/ignore/${pageImageId}`, {
       method: 'PUT',
       headers:{
         'Accept': 'application/json',
@@ -43,7 +43,7 @@ class OcrCorrectionPage extends React.Component {
 
   markPageCompleted() {
     const pageImageId = this.props.ocrWords[0].ocrWordId.pageImageId;
-    fetch(`${process.env.REACT_APP_REST_API_BASE_NAME}/train/page/complete/${pageImageId}`, {
+    fetch(`${process.env.REACT_APP_REST_API_BASE_NAME}/ocr/train/correction/page/complete/${pageImageId}`, {
       method: 'PUT',
       headers:{
         'Accept': 'application/json',
@@ -73,7 +73,7 @@ class OcrCorrectionPage extends React.Component {
     });
 
     if (ignoredWords.length > 0) {
-      fetch(`${process.env.REACT_APP_REST_API_BASE_NAME}/train/word/ignore`, {
+      fetch(`${process.env.REACT_APP_REST_API_BASE_NAME}/ocr/train/correction/word/ignore`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -105,7 +105,7 @@ class OcrCorrectionPage extends React.Component {
     });
 
     if (correctedWords.length > 0) {
-      fetch(`${process.env.REACT_APP_REST_API_BASE_NAME}/train/word`, {
+      fetch(`${process.env.REACT_APP_REST_API_BASE_NAME}/ocr/train/correction/word`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
