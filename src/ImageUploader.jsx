@@ -34,8 +34,6 @@ class ImageUploader extends React.Component {
         method: 'POST',
         body: data,
         headers:{
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
           'Authorization': this.props.googleAccessToken
         }
       }).then(response => {
