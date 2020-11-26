@@ -56,3 +56,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 ## Google Integration
 1. Integrate Google sign-in: <https://developers.google.com/identity/sign-in/web/sign-in>
 1. Google sign-in React component: <https://www.npmjs.com/package/react-google-login>
+
+## Look and Feel
+1.  Bootstrap: <https://getbootstrap.com/docs/4.5/getting-started/introduction/>
+1.  Font Awesome: <https://fontawesome.com/start>

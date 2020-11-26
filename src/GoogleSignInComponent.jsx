@@ -12,8 +12,8 @@ class GoogleSignInComponent extends Component {
 
   render() {
     return (
-      <div class="text-center mb-4">
-        <h1 class="h3 mb-3 font-weight-normal">Welcome to Porua: A Bengali OCR Correction Platform</h1>
+      <div className="text-center mb-4">
+        <h1 className="h3 mb-3 font-weight-normal">Welcome to Porua: A Bengali OCR Correction Platform</h1>
         <p>Sign In</p>
         <GoogleLogin
           clientId={CLIENT_ID}

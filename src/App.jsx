@@ -54,6 +54,50 @@ class App extends React.Component {
     alert('Failed to log in')
   }
 
+  renderNavBar() {
+    
+    return (
+      <nav className="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+      <div className="navbar-brand" style={{backgroundImage: "url(bars-solid.svg)"}}>Ocr Correction Page</div>
+      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+        <span className="navbar-toggler-icon"></span>
+      </button>
+      {this.state.page &&
+      <div className="collapse navbar-collapse" id="navbarMain">
+        <ul className="navbar-nav">
+          <li className="nav-item dropdown">
+            <div className="nav-link dropdown-toggle" id="navbarLanguageMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Language
+            </div>
+            
+            <div className="dropdown-menu" aria-labelledby="navbarLanguageMenuLink">
+              <div className="dropdown-item">{this.state.page.book.language}</div>
+            </div>            
+          </li>
+          <li className="nav-item dropdown">
+            <div className="nav-link dropdown-toggle" id="navbarBookMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Book
+            </div>
+            
+            <div className="dropdown-menu" aria-labelledby="navbarBookMenuLink">
+              <div className="dropdown-item">{this.state.page.book.name}</div>
+            </div>            
+          </li>
+          <li className="nav-item dropdown active">
+            <div className="nav-link dropdown-toggle" id="navbarPageMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Page <span className="sr-only">(current)</span>
+            </div>            
+            <div className="dropdown-menu" aria-labelledby="navbarPageMenuLink">
+              <div className="dropdown-item">{this.state.page.name}</div>
+            </div>            
+          </li>
+        </ul>
+      </div>   
+      }   
+    </nav>
+    );
+  }
+
   renderApplicationAfterLogin() {
     let panelToDisplay;
     const ocrWordsRecievedEvent = (ocrWordListData, page) => {
@@ -99,6 +143,7 @@ class App extends React.Component {
       <div className="jumbotron jumbotron-fluid">
         <div className="container-xl">
           <h1 className="display-4">OCR Training Workbench</h1>
+          {this.renderNavBar()}
           {panelToDisplay}
           </div>          
       </div>

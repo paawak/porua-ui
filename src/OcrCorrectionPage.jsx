@@ -186,45 +186,7 @@ class OcrCorrectionPage extends React.Component {
     };
 
     return (
-      <div className="container">     
-        <nav className="navbar sticky-top navbar-expand-lg navbar-light bg-light">
-          <div className="navbar-brand">Ocr Correction Page</div>
-          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarMain">
-            <ul className="navbar-nav">
-              <li className="nav-item dropdown">
-                <div className="nav-link dropdown-toggle" id="navbarLanguageMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Language
-                </div>
-                <div className="dropdown-menu" aria-labelledby="navbarLanguageMenuLink">
-                  <div className="dropdown-item">{this.props.page.book.language}</div>
-                </div>
-              </li>
-              <li className="nav-item dropdown">
-                <div className="nav-link dropdown-toggle" id="navbarBookMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Book
-                </div>
-                <div className="dropdown-menu" aria-labelledby="navbarBookMenuLink">
-                  <div className="dropdown-item">{this.props.page.book.name}</div>
-                </div>
-              </li>
-              <li className="nav-item dropdown active">
-                <div className="nav-link dropdown-toggle" id="navbarPageMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Page <span className="sr-only">(current)</span>
-                </div>
-                <div className="dropdown-menu" aria-labelledby="navbarPageMenuLink">
-                  <div className="dropdown-item">{this.props.page.name}</div>
-                </div>
-              </li>
-            </ul>
-          </div>
-          <button id="ignorePageButton" className="btn btn-danger my-2 my-sm-0" type="button" onClick={this.markPageIgnored}>Ignore Page</button>
-          <button id="submitForCorrectionButton" className="btn btn-primary my-2 my-sm-0" type="button" onClick={this.handleSubmitForCorrection}>Submit For Correction</button>
-          <button id="correctionCompletedButton" className="btn btn-success my-2 my-sm-0" type="button" onClick={this.markPageCompleted}>Correction Completed</button>
-        </nav>
-        
+      <div className="container">             
         { this.state.wordDeletedFailed &&
           displayError("ignore")
         }
@@ -260,6 +222,13 @@ class OcrCorrectionPage extends React.Component {
         <div className="row row-cols-4">
           {ocrWords}
         </div>
+
+        <nav className="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+          <button id="ignorePageButton" className="btn btn-danger my-2 my-sm-0" type="button" onClick={this.markPageIgnored}>Ignore Page</button>
+          <button id="submitForCorrectionButton" className="btn btn-primary my-2 my-sm-0" type="button" onClick={this.handleSubmitForCorrection}>Submit For Correction</button>
+          <button id="correctionCompletedButton" className="btn btn-success my-2 my-sm-0" type="button" onClick={this.markPageCompleted}>Correction Completed</button>
+        </nav>        
+
       </div>
     );
   }
