@@ -25,6 +25,7 @@ class App extends React.Component {
 
     this.loginSuccess = this.loginSuccess.bind(this);
     this.handleLoginFailure = this.handleLoginFailure.bind(this);
+    this.handleChooseBook = this.handleChooseBook.bind(this);
   }
 
   render() {
@@ -51,7 +52,16 @@ class App extends React.Component {
   }
 
   handleLoginFailure (response) {
-    alert('Failed to log in')
+    alert('Failed to log in');
+  }
+
+  handleChooseBook () {
+    this.setState({
+      displayMode: DisplayMode.PAGE_SELECTION,
+      ocrWords: [],
+      book: null,
+      page: null
+    });
   }
 
   renderNavBar() {
@@ -71,8 +81,8 @@ class App extends React.Component {
                 <span className="sr-only">(current)</span>
               </div>        
               <div className="dropdown-menu" aria-labelledby="navbarMainMenuChooseBook">
-                <div className="dropdown-item">Choose Book</div>
-              </div>            
+                <div className="dropdown-item" onClick={this.state.page ? this.handleChooseBook : "#"}>Choose Book</div>
+              </div>                        
             </li>     
             {this.state.page &&
             <>                    
