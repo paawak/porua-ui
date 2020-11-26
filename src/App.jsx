@@ -57,61 +57,54 @@ class App extends React.Component {
   renderNavBar() {
     
     return (
-      <nav className="navbar sticky-top navbar-expand-lg navbar-light bg-light">      
+      <nav className="navbar sticky-top navbar-expand-lg navbar-light bg-light">            
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMainMenu" aria-controls="navbarMainMenu" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>      
-      <div className="collapse navbar-collapse" id="navbarMainMenu">
-        <ul className="navbar-nav">                 
-            <li className="nav-item dropdown active">
-              <div className="nav-link dropdown-toggle" id="navbarMainMenuBookLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <div className="collapse navbar-collapse" id="navbarMainMenu">        
+        <ul className="navbar-nav">    
+          <li className="nav-item dropdown active">
+              <div className="nav-link dropdown-toggle" id="navbarMainMenuChooseBook" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <a class="navbar-brand" href="#">
                   <img src="/bars-solid.svg" width="30" height="30" alt="" loading="lazy"/>
                 </a>    
                 <span className="sr-only">(current)</span>
               </div>        
-              <div className="dropdown-menu" aria-labelledby="navbarLanguageMenuLink">
-                <div className="dropdown-item">HHHH</div>
+              <div className="dropdown-menu" aria-labelledby="navbarMainMenuChooseBook">
+                <div className="dropdown-item">Choose Book</div>
               </div>            
-            </li>            
-          </ul>    
-      </div>
-      {this.state.page &&
-      <>
-      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarPageMenu" aria-controls="navbarPageMenu" aria-expanded="false" aria-label="Toggle navigation">
-        <span className="navbar-toggler-icon"></span>
-      </button>      
-      <div className="collapse navbar-collapse" id="navbarPageMenu">
-        <ul className="navbar-nav">                 
-          <li className="nav-item dropdown">
-            <div className="nav-link dropdown-toggle" id="navbarLanguageMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Language
-            </div>            
-            <div className="dropdown-menu" aria-labelledby="navbarLanguageMenuLink">
-              <div className="dropdown-item">{this.state.page.book.language}</div>
-            </div>            
-          </li>
-          <li className="nav-item dropdown">
-            <div className="nav-link dropdown-toggle" id="navbarBookMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Book
-            </div>
-            
-            <div className="dropdown-menu" aria-labelledby="navbarBookMenuLink">
-              <div className="dropdown-item">{this.state.page.book.name}</div>
-            </div>            
-          </li>
-          <li className="nav-item dropdown">
-            <div className="nav-link dropdown-toggle" id="navbarPageMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Page
-            </div>            
-            <div className="dropdown-menu" aria-labelledby="navbarPageMenuLink">
-              <div className="dropdown-item">{this.state.page.name}</div>
-            </div>            
-          </li>
+            </li>     
+            {this.state.page &&
+            <>                    
+            <li className="nav-item dropdown">
+              <div className="nav-link dropdown-toggle" id="navbarLanguageMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Language
+              </div>            
+              <div className="dropdown-menu" aria-labelledby="navbarLanguageMenuLink">
+                <div className="dropdown-item">{this.state.page.book.language}</div>
+              </div>            
+            </li>
+            <li className="nav-item dropdown">
+              <div className="nav-link dropdown-toggle" id="navbarBookMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Book
+              </div>
+              
+              <div className="dropdown-menu" aria-labelledby="navbarBookMenuLink">
+                <div className="dropdown-item">{this.state.page.book.name}</div>
+              </div>            
+            </li>
+            <li className="nav-item dropdown">
+              <div className="nav-link dropdown-toggle" id="navbarPageMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Page
+              </div>            
+              <div className="dropdown-menu" aria-labelledby="navbarPageMenuLink">
+                <div className="dropdown-item">{this.state.page.name}</div>
+              </div>            
+            </li>
+            </>
+            }
         </ul>      
-      </div>   
-      </>
-      }             
+      </div>                    
     </nav>
     );
   }
