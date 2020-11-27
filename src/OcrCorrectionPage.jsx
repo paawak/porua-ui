@@ -178,12 +178,7 @@ class OcrCorrectionPage extends React.Component {
     };
 
     return (
-      <div className="container">        
-        <nav className="navbar sticky-top navbar-expand-lg navbar-light bg-light">
-          <button id="ignorePageButton" className="btn btn-danger my-2 my-sm-0" type="button" onClick={this.markPageIgnored}>Ignore Page</button>
-          <button id="submitForCorrectionButton" className="btn btn-primary my-2 my-sm-0" type="button" onClick={this.handleSubmitForCorrection}>Submit For Correction</button>
-          <button id="correctionCompletedButton" className="btn btn-success my-2 my-sm-0" type="button" onClick={this.markPageCompleted}>Correction Completed</button>
-        </nav>    
+      <div className="container">                
 
         { this.state.wordDeletedFailed &&
           displayError("ignore")
@@ -219,7 +214,13 @@ class OcrCorrectionPage extends React.Component {
 
         <div className="row row-cols-4">
           {ocrWords}
-        </div>    
+        </div>  
+
+        <nav className="navbar fixed-bottom navbar-expand-lg navbar-light bg-light">
+          <button id="ignorePageButton" className="btn btn-danger my-2 my-sm-0" type="button" onClick={this.markPageIgnored}>Ignore Page</button>
+          <button id="submitForCorrectionButton" className="btn btn-primary my-2 my-sm-0" type="button" onClick={this.handleSubmitForCorrection}>Submit For Correction</button>
+          <button id="correctionCompletedButton" className="btn btn-success my-2 my-sm-0" type="button" onClick={this.markPageCompleted}>Correction Completed</button>
+        </nav>
 
       </div>
     );
