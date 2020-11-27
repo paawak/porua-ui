@@ -24,7 +24,6 @@ class App extends React.Component {
     };
 
     this.loginSuccess = this.loginSuccess.bind(this);
-    this.handleLoginFailure = this.handleLoginFailure.bind(this);
     this.handleChooseBook = this.handleChooseBook.bind(this);
   }
 
@@ -38,7 +37,7 @@ class App extends React.Component {
 
   renderLoginPage() {
     return (
-      <GoogleSignInComponent loginSuccess={this.loginSuccess} handleLoginFailure={this.handleLoginFailure}/>
+      <GoogleSignInComponent loginSuccess={this.loginSuccess}/>
     );
   }
 
@@ -49,10 +48,6 @@ class App extends React.Component {
         googleAccessToken: response.tokenId
       }));
     }
-  }
-
-  handleLoginFailure (response) {
-    alert('Failed to log in');
   }
 
   handleChooseBook () {
