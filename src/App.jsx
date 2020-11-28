@@ -43,10 +43,24 @@ class App extends React.Component {
 
   loginSuccess(response) {
     if(response.accessToken){
-      this.setState(state => ({
-        isLoggedIn: true,
-        googleAccessToken: response.tokenId
-      }));
+
+      fetch(`${process.env.REACT_APP_REST_API_BASE_NAME}/ocr/train/user/register`, {
+        method: 'GET',
+        headers:{
+          'Authorization': response.tokenId
+        }
+      }).then(response => {                
+        return response.json();
+      }).then(jsonReponse => {
+        //TODO find out role
+        console.log('***** UserDeatils', jsonReponse);
+        if (jsonReponse.id) {
+          this.setState(state => ({
+            isLoggedIn: true,
+            googleAccessToken: response.tokenId
+          }));
+        }
+      });     
     }
   }
 
@@ -70,13 +84,13 @@ class App extends React.Component {
         <ul className="navbar-nav">    
           <li className="nav-item dropdown active">
               <div className="nav-link dropdown-toggle" id="navbarMainMenuChooseBook" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <a class="navbar-brand" href="#">
+                <a className="navbar-brand" href="#">
                   <img src="/bars-solid.svg" width="30" height="30" alt="" loading="lazy"/>
                 </a>    
                 <span className="sr-only">(current)</span>
               </div>        
               <div className="dropdown-menu" aria-labelledby="navbarMainMenuChooseBook">
-                <div className="dropdown-item" onClick={this.state.page ? this.handleChooseBook : "#"}>Choose Book</div>
+                <div className="dropdown-item" onClick={this.state.page ? this.handleChooseBook : null}>Choose Book</div>
               </div>                        
             </li>     
             {this.state.page &&
