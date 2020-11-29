@@ -100,7 +100,7 @@ class App extends React.Component {
               Language
               </div>            
               <div className="dropdown-menu" aria-labelledby="navbarLanguageMenuLink">
-                <div className="dropdown-item disabled" tabindex="-1" aria-disabled="true">{this.state.page.book.language}</div>
+                <div className="dropdown-item disabled" tabIndex="-1" aria-disabled="true">{this.state.page.book.language}</div>
               </div>            
             </li>
             <li className="nav-item dropdown">
@@ -108,7 +108,7 @@ class App extends React.Component {
               Book
               </div>              
               <div className="dropdown-menu" aria-labelledby="navbarBookMenuLink">
-                <div className="dropdown-item disabled" tabindex="-1" aria-disabled="true">{this.state.page.book.name}</div>
+                <div className="dropdown-item disabled" tabIndex="-1" aria-disabled="true">{this.state.page.book.name}</div>
               </div>            
             </li>
             <li className="nav-item dropdown">
@@ -116,7 +116,7 @@ class App extends React.Component {
               Page
               </div>            
               <div className="dropdown-menu" aria-labelledby="navbarPageMenuLink">
-                <div className="dropdown-item disabled" tabindex="-1" aria-disabled="true">{this.state.page.name}</div>
+                <div className="dropdown-item disabled" tabIndex="-1" aria-disabled="true">{this.state.page.name}</div>
               </div>            
             </li>
             </>
