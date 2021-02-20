@@ -24,7 +24,7 @@ class App extends React.Component {
     };
 
     this.loginSuccess = this.loginSuccess.bind(this);
-    this.handleLoginFailure = this.handleLoginFailure.bind(this);
+    this.handleChooseBook = this.handleChooseBook.bind(this);
   }
 
   render() {
@@ -37,21 +37,94 @@ class App extends React.Component {
 
   renderLoginPage() {
     return (
-      <GoogleSignInComponent loginSuccess={this.loginSuccess} handleLoginFailure={this.handleLoginFailure}/>
+      <GoogleSignInComponent loginSuccess={this.loginSuccess}/>
     );
   }
 
   loginSuccess(response) {
     if(response.accessToken){
-      this.setState(state => ({
-        isLoggedIn: true,
-        googleAccessToken: response.tokenId
-      }));
+
+      fetch(`${process.env.REACT_APP_REST_API_BASE_NAME}/ocr/train/user/register`, {
+        method: 'GET',
+        headers:{
+          'Authorization': response.tokenId
+        }
+      }).then(response => {                
+        return response.json();
+      }).then(jsonReponse => {
+        //TODO find out role
+        console.log('***** UserDeatils', jsonReponse);
+        if (jsonReponse.id) {
+          this.setState(state => ({
+            isLoggedIn: true,
+            googleAccessToken: response.tokenId
+          }));
+        }
+      });     
     }
   }
 
-  handleLoginFailure (response) {
-    alert('Failed to log in')
+  handleChooseBook () {
+    this.setState({
+      displayMode: DisplayMode.PAGE_SELECTION,
+      ocrWords: [],
+      book: null,
+      page: null
+    });
+  }
+
+  renderNavBar() {
+    
+    return (
+      <nav className="navbar sticky-top navbar-expand-lg navbar-light bg-light">            
+      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMainMenu" aria-controls="navbarMainMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span className="navbar-toggler-icon"></span>
+      </button>      
+      <div className="collapse navbar-collapse" id="navbarMainMenu">        
+        <ul className="navbar-nav">    
+          <li className="nav-item dropdown active">
+              <div className="nav-link dropdown-toggle" id="navbarMainMenuChooseBook" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a className="navbar-brand" href="#">
+                  <img src="/bars-solid.svg" width="30" height="30" alt="" loading="lazy"/>
+                </a>    
+                <span className="sr-only">(current)</span>
+              </div>        
+              <div className="dropdown-menu" aria-labelledby="navbarMainMenuChooseBook">
+                <div className="dropdown-item" onClick={this.state.page ? this.handleChooseBook : null}>Choose Book</div>
+              </div>                        
+            </li>     
+            {this.state.page &&
+            <>                    
+            <li className="nav-item dropdown">
+              <div className="nav-link dropdown-toggle" id="navbarLanguageMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Language
+              </div>            
+              <div className="dropdown-menu" aria-labelledby="navbarLanguageMenuLink">
+                <div className="dropdown-item disabled" tabIndex="-1" aria-disabled="true">{this.state.page.book.language}</div>
+              </div>            
+            </li>
+            <li className="nav-item dropdown">
+              <div className="nav-link dropdown-toggle" id="navbarBookMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Book
+              </div>              
+              <div className="dropdown-menu" aria-labelledby="navbarBookMenuLink">
+                <div className="dropdown-item disabled" tabIndex="-1" aria-disabled="true">{this.state.page.book.name}</div>
+              </div>            
+            </li>
+            <li className="nav-item dropdown">
+              <div className="nav-link dropdown-toggle" id="navbarPageMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Page
+              </div>            
+              <div className="dropdown-menu" aria-labelledby="navbarPageMenuLink">
+                <div className="dropdown-item disabled" tabIndex="-1" aria-disabled="true">{this.state.page.name}</div>
+              </div>            
+            </li>
+            </>
+            }
+        </ul>      
+      </div>                    
+    </nav>
+    );
   }
 
   renderApplicationAfterLogin() {
@@ -99,6 +172,7 @@ class App extends React.Component {
       <div className="jumbotron jumbotron-fluid">
         <div className="container-xl">
           <h1 className="display-4">OCR Training Workbench</h1>
+          {this.renderNavBar()}
           {panelToDisplay}
           </div>          
       </div>
