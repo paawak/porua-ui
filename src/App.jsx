@@ -44,7 +44,7 @@ class App extends React.Component {
   loginSuccess(response) {
     if(response.accessToken){
 
-      fetch(`${process.env.REACT_APP_REST_API_BASE_NAME}/ocr/train/user/register`, {
+      fetch(`${process.env.REACT_APP_REST_API_BASE_NAME}/ocr/train/user/registration`, {
         method: 'GET',
         headers:{
           'Authorization': response.tokenId
